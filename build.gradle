@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.1.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url = 'https://maven.dcm4che.org/'
+	}
+}
+
+group = 'com.medtech'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(26)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testCompileOnly 'org.projectlombok:lombok'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// --- Phase 1: DICOM Processing (dcm4che) ---
+	// Core data structures, DICOM object model, and tag dictionaries
+	implementation 'org.dcm4che:dcm4che-core:5.31.0'
+	// Image I/O support for reading frame pixel data if needed
+	implementation 'org.dcm4che:dcm4che-imageio:5.31.0'
+
+	// --- Phase 2: Database & Persistence ---
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// --- Phase 3: AWS Cloud Integration ---
+	// Spring Cloud AWS starter for simple S3 & SQS integration
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.1.1'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.1.1'
+
+	// --- Testing ---
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
