@@ -47,12 +47,19 @@ dependencies {
 
 	// --- Phase 3: AWS Cloud Integration ---
 	// Spring Cloud AWS starter for simple S3 & SQS integration
-	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.1.1'
-	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.1.1'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:4.0.0'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:4.0.0'
 
 	// --- Testing ---
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Flyway for database migrations
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql'
+
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {

@@ -1,11 +1,10 @@
-package com.medtech.dicom.service;
+package com.medtech.dicom.pipeline;
 
 import com.medtech.dicom.pipeline.service.DicomParserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import java.io.InputStream;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DicomParserServiceTest {
